@@ -13,6 +13,8 @@ Microsoft Sql server
 - Data cleaning and preparation
 - Data analysis
 - Problem solving
+## Problem solution and analysis
+
 
 ## Overview
 
