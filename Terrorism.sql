@@ -1,5 +1,4 @@
-select * from terrorism
---where country_txt like 'Iraq'
+ select * from terrorism
 
 --Data cleaning
 
@@ -91,25 +90,33 @@ from terrorism
 group by attacktype1_txt, targtype1_txt
 order by attack_type_numbers desc
 
---total casualities by year
-select year, sum(total_casualties) as total_casualities
+--year by total casualities and successful operations
+select year, sum(total_casualties) as total_casualities, count(success) as successful_operations
 from terrorism
+where year is not null and success = 1
 group by year
 order by total_casualities desc
 
---successful operations by terrorist group
+--successful operations by terrorist group   
 select gname, sum(success) as successful_operations 
 from terrorism
 where success = 1 and gname not like 'Unknown'
 group by gname
 order by successful_operations desc
 
---Unsuccessful operations by terrorist group
+--Unsuccessful operations by terrorist group 
 select gname, count(success) as Unsuccessful_operations 
 from terrorism
 where success = 0 and gname not like 'Unknown'
 group by gname
 order by Unsuccessful_operations desc
+
+--region by successful operations carried out by terrorists
+select region_txt, count(success) as successful_operations
+from terrorism
+where success = 1 
+group by region_txt
+order by successful_operations desc
 
 --successful operations by region
 select region_txt, count(success) as successful_operations
